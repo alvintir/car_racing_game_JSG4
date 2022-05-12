@@ -1,0 +1,65 @@
+canvas {
+    /* margin: 0 auto; */
+    display: block;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    top:0px;
+    bottom:10px;
+    left:0px;
+    right:0px;
+
+
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    background-color: black;
+  
+}
+
+#score{
+    font-family: 'DM Serif Display', serif;
+    font-size: 50px;
+    margin-left: 150px;
+    margin-top: 10px;
+    justify-content: center;
+  display: flex;
+ 
+
+ background: -webkit-linear-gradient(
+         -225deg,
+         #231557 0%,
+         #44107a 29%,
+         #ff1361 67%,
+         #fff800 100%
+       );
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+    display: inline-block;
+    
+}
+
+#instruction {
+    font-family:Tahoma;
+    font-size: 20px;
+    max-width: 400px;
+    font-weight:lighter;
+    color: white;
+    text-decoration:wavy;
+    padding-top:10px;
+    text-align: justify;
+    margin-left: 50px;
+    
+    
+}
