@@ -1,12 +1,14 @@
 canvas {
     /* margin: 0 auto; */
     display: block;
+   
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+ 
 }
 
 body {
@@ -25,6 +27,7 @@ nav {
     display: flex;
     overflow: auto;
     background-color: black;
+    position: fixed;
   
 }
 
@@ -34,7 +37,7 @@ nav {
     margin-left: 150px;
     margin-top: 10px;
     justify-content: center;
-  display: flex;
+    display: flex;
  
 
  background: -webkit-linear-gradient(
@@ -43,7 +46,8 @@ nav {
          #44107a 29%,
          #ff1361 67%,
          #fff800 100%
-       );
+          );
+        
      -webkit-background-clip: text;
      -webkit-text-fill-color: transparent;
     display: inline-block;

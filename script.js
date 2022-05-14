@@ -6,7 +6,7 @@ const scoreElement = document.querySelector('#score span');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const ctx = canvas.getContext('2d');
+const context = canvas.getContext('2d');
 
 let pause = false;
 let score = 0;
@@ -42,54 +42,54 @@ const gameOver = () => {
 
 
 let roadlayoutPosY = 0;
-roadlayout.onload = () => {
-    const drawRoad = () => {
-        ctx.drawImage(roadlayout, 0, roadlayoutPosY - canvas.height, canvas.width, canvas.height * 2);
-        //ctx.drawImage(roadlayout, 0, roadlayoutPosY, canvas.width, canvas.height);
-        roadlayoutPosY += 10 + speed + score;
-        //Reset road position
-        if (roadlayoutPosY >= canvas.height) {
-            roadlayoutPosY = 0;
-        }
-        if (pause) return;
-        window.requestAnimationFrame(drawRoad);
+const drawRoad = () => {
+    context.drawImage(roadlayout, 0, roadlayoutPosY - canvas.height, canvas.width, canvas.height * 2);
+    //context.drawImage(roadlayout, 0, roadlayoutPosY, canvas.width, canvas.height);
+    roadlayoutPosY += 10 + speed ;
+    //Reset road position
+    if (roadlayoutPosY >= canvas.height) {
+        roadlayoutPosY = 0;
     }
-    drawRoad();
+    if (pause) return; 
+    window.requestAnimationFrame(drawRoad);
+}
+roadlayout.onload = () => {
+     drawRoad();
 };
 
 
-const spawnIncommingVehicles = (positionY) => {
-    let incommingVehicle = new Image();
-    incommingVehicle.src = randomVehicle();
-    let incommingVehiclePosX = [12, 145, 285][Math.floor(Math.random() * 3)];
-    let incommingVehiclePosY = positionY;
+const spawnObstacless = (positionY) => {
+    let Obstacles = new Image();
+    Obstacles.src = randomVehicle();
+    let ObstaclesPosX = [300,400, 500,600,700,800,900,1000][Math.floor(Math.random()*8)];
+    let ObstaclesPosY = positionY;
     
-    incommingVehicle.onload = () => {
-        const drawIncommingVehicle = () => {
-            ctx.drawImage(incommingVehicle, incommingVehiclePosX, incommingVehiclePosY);
+    Obstacles.onload = () => {
+        const drawObstacles = () => {
+            context.drawImage(Obstacles, ObstaclesPosX, ObstaclesPosY);
            
             if (pause) return;
-            incommingVehiclePosY += 2 + speed + score;
-            if (incommingVehiclePosY >= canvas.height) {
+            ObstaclesPosY += 1 + speed;
+            if (ObstaclesPosY >= canvas.height) {
                 scoreElement.innerHTML = ++score;
-                //incommingVehicle.src = randomVehicle();
-                incommingVehiclePosX = [12, 145, 285][Math.floor(Math.random() * 3)];
-                incommingVehiclePosY = -incommingVehicle.height;
-            } else if (incommingVehiclePosY + incommingVehicle.height > playerVehiclePositionY) {
-                if (playerVehiclePositionX > incommingVehiclePosX && playerVehiclePositionX < incommingVehiclePosX + incommingVehicle.width || playerVehiclePositionX + playerVehicle.width > incommingVehiclePosX && playerVehiclePositionX + playerVehicle.width < incommingVehiclePosX + incommingVehicle.width) {
+                //Obstacles.src = randomVehicle();
+                ObstaclesPosX = [300,400, 500,600,700,800,900,1000][Math.floor(Math.random()*8)];
+                ObstaclesPosY = -Obstacles.height;
+            } else if (ObstaclesPosY + Obstacles.height > playerVehiclePositionY) {
+                if (playerVehiclePositionX > ObstaclesPosX && playerVehiclePositionX < ObstaclesPosX + Obstacles.width || playerVehiclePositionX + playerVehicle.width > ObstaclesPosX && playerVehiclePositionX + playerVehicle.width < ObstaclesPosX + Obstacles.width) {
                     gameOver();
-                } else if (incommingVehiclePosX > playerVehiclePositionX && incommingVehiclePosX < playerVehiclePositionX + playerVehicle.width || incommingVehiclePosX + incommingVehicle.width > playerVehiclePositionX && incommingVehiclePosX + incommingVehicle.width < playerVehiclePositionX + playerVehicle.width) {
+                } else if (ObstaclesPosX > playerVehiclePositionX && ObstaclesPosX < playerVehiclePositionX + playerVehicle.width || ObstaclesPosX + Obstacles.width > playerVehiclePositionX && ObstaclesPosX + Obstacles.width < playerVehiclePositionX + playerVehicle.width) {
                     gameOver();
                 }
             }
-            window.requestAnimationFrame(drawIncommingVehicle);
+            window.requestAnimationFrame(drawObstacles);
         }
-        drawIncommingVehicle();
+        drawObstacles();
     };
 } 
 
-spawnIncommingVehicles(-285);
-spawnIncommingVehicles(-750);
+spawnObstacless(-285);
+spawnObstacless(-750);
 
 const playerVehicle = new Image();
 playerVehicle.src = randomVehicle();
@@ -101,7 +101,7 @@ playerVehicle.onload = () => {
     playerVehiclePositionX = (canvas.width - playerVehicle.width) / 2;
     playerVehiclePositionY = canvas.height - playerVehicle.height -10;
     const drawplayerVehicle = () => {
-        ctx.drawImage(playerVehicle, playerVehiclePositionX, playerVehiclePositionY);
+        context.drawImage(playerVehicle, playerVehiclePositionX, playerVehiclePositionY);
         if (playerVehiclePositionX + playerVehicleSpeed > canvas.width - playerVehicle.width) {
             playerVehiclePositionX = canvas.width - playerVehicle.width;    
         } else if (playerVehiclePositionX + playerVehicleSpeed < 0) {
@@ -117,9 +117,9 @@ playerVehicle.onload = () => {
 
 document.addEventListener('keydown', (e) => {
     if (e.code === 'ArrowLeft' && playerVehiclePositionX >= 0) {
-        playerVehicleSpeed = -12;
+        playerVehicleSpeed = -5;
     } else if (e.code === 'ArrowRight' && playerVehiclePositionX < canvas.width-playerVehicle.width) {
-        playerVehicleSpeed = 12;
+        playerVehicleSpeed = 5;
     } else if (e.code === 'Space') {
         speed = 10;
         music.play();
@@ -129,7 +129,7 @@ document.addEventListener('keydown', (e) => {
 
 document.addEventListener('keyup', (e) => {
     if (e.code === 'Space') {
-        speed = 0;
+        speed = 2;
         music.play();
     } else if (e.code === 'ArrowRight' || 'ArrowLeft') {
         playerVehicleSpeed = 0;
